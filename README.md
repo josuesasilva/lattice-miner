@@ -19,7 +19,7 @@ Sample of binary and triadic context files are in the the [files](https://github
 Clone the repository with:
 
 ```
-git clone https://github.com/LarimUQO/lattice-miner.git
+git clone https://github.com/josuesasilva/lattice-miner
 ```
 
 This project has a Maven pom file. Open it with your favorite Java IDE.
