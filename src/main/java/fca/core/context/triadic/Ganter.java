@@ -36,6 +36,10 @@ public class Ganter {
 	}
 
 	public String showRules() {
+                
+                long bRulesSize = 0, caisRulesSize = 0;
+                long startTime = System.currentTimeMillis();
+            
 		StringBuilder rules = new StringBuilder();
 		// Contexts with Conditions.
 		rules.append("== Biedermann's implications  ==\n"); // Diadic decomposition
@@ -58,6 +62,7 @@ public class Ganter {
 					bucketTriadicRules.add(biRule);
 				}
 				rules.append(biRule);
+                                bRulesSize++;
 				rules.append("\n");
 			}
 		}
@@ -67,14 +72,33 @@ public class Ganter {
 		for (Bucket bucket : buckets) {
 			rules.append(bucket);
 		}
+                
+                long endTime = System.currentTimeMillis();
+                long msDuration = (endTime - startTime);
+                double sDuration = msDuration / 1000.0;
+                
+                rules.append(String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
+                        bRulesSize, msDuration, sDuration));
 
+                startTime = System.currentTimeMillis();
+                
 		rules.append("\n==== CAIs ======\n");
 		for (Bucket bucket : buckets) {
 			bucket.decomposeRuleConsequence();
 			bucket.toCAIs(contextsWithCondition);
 			bucket.removeDuplicateRulesFromBucket();
 			rules.append(bucket);
+                        caisRulesSize++;
 		}
+                
+                endTime = System.currentTimeMillis();
+                msDuration = (endTime - startTime); 
+                
+                sDuration = msDuration / 1000.0;
+                
+                rules.append(String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
+                        caisRulesSize, msDuration, sDuration));
+                
 		return rules.toString();
 	}
 

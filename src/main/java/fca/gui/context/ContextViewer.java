@@ -1684,6 +1684,8 @@ public class ContextViewer extends Viewer {
 	}
 
 	protected void triadicBACAR() {
+                long startTime = System.currentTimeMillis();
+                
 		// TODO: BACAR
 		ContextTableScrollPane selectedPane = contextPanes
 				.elementAt(currentContextIdx);
@@ -1704,10 +1706,20 @@ public class ContextViewer extends Viewer {
 
 		Vector<Rule> rules = algo.getRules();
 		String bacarRules = TriadicAlgorithms.minnerBACAR(rules);
+                
+                long endTime = System.currentTimeMillis();
+                long msDuration = (endTime - startTime); 
+                double sDuration = msDuration / 1000.0; 
+                
+                bacarRules += String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
+                        bacarRules.split(":").length-1, msDuration, sDuration);
+                
 		simpleRulesViewer(bacarRules, GUIMessages.getString("GUI.triadicBACAR"));
 	}
 
 	protected void triadicBCAAR() {
+                long startTime = System.currentTimeMillis();
+                
 		// TODO: BCAAR
 
 		ContextTableScrollPane selectedPane = contextPanes
@@ -1728,6 +1740,14 @@ public class ContextViewer extends Viewer {
 		RuleAlgorithm algo = new InformativeBasisAlgorithm(lattice,minSupp / 100.0, minConf / 100.0);
 		Vector<Rule> rules = algo.getRules();
 		String bcaarRules = TriadicAlgorithms.minnerBCAAR(rules);
+                
+                long endTime = System.currentTimeMillis();
+                long msDuration = (endTime - startTime); 
+                double sDuration = msDuration / 1000.0; 
+                
+                bcaarRules += String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
+                        bcaarRules.split(":").length-1, msDuration, sDuration);
+                
 		simpleRulesViewer(bcaarRules, GUIMessages.getString("GUI.triadicBCAAR"));
 
 	}
