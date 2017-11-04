@@ -151,7 +151,6 @@ public class ContextViewer extends Viewer {
 		setTitle(GUIMessages.getString("GUI.latticeMiner")); //$NON-NLS-1$
 		setDefaultLookAndFeelDecorated(false);
 
-
 		// Pour le fonctionnement sous Mac OSX avec la barre de menu en haut...
 		System.setProperty("apple.laf.useScreenMenuBar", "true");
 		// set the name of the application menu item
@@ -1711,8 +1710,12 @@ public class ContextViewer extends Viewer {
                 long msDuration = (endTime - startTime); 
                 double sDuration = msDuration / 1000.0; 
                 
-                bacarRules += String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
+                String report = String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
                         bacarRules.split(":").length-1, msDuration, sDuration);
+                
+                bacarRules += report;
+                
+                System.out.println(String.format("%s BACAR report: %s", new Date().toString(), report));
                 
 		simpleRulesViewer(bacarRules, GUIMessages.getString("GUI.triadicBACAR"));
 	}
@@ -1745,8 +1748,12 @@ public class ContextViewer extends Viewer {
                 long msDuration = (endTime - startTime); 
                 double sDuration = msDuration / 1000.0; 
                 
-                bcaarRules += String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
+                String report = String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
                         bcaarRules.split(":").length-1, msDuration, sDuration);
+                
+                bcaarRules += report;
+                
+                System.out.println(String.format("%s BCAAR report: %s", new Date().toString(), report));
                 
 		simpleRulesViewer(bcaarRules, GUIMessages.getString("GUI.triadicBCAAR"));
 

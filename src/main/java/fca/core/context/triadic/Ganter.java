@@ -77,10 +77,15 @@ public class Ganter {
                 long msDuration = (endTime - startTime);
                 double sDuration = msDuration / 1000.0;
                 
-                rules.append(String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
-                        bRulesSize, msDuration, sDuration));
+                String report = String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
+                        bRulesSize, msDuration, sDuration);
+               
+                rules.append(report);
+                
+                System.out.println(String.format("%s Biedermann's implications report: %s", new Date().toString(), report));
 
                 startTime = System.currentTimeMillis();
+                
                 
 		rules.append("\n==== CAIs ======\n");
 		for (Bucket bucket : buckets) {
@@ -96,8 +101,12 @@ public class Ganter {
                 
                 sDuration = msDuration / 1000.0;
                 
-                rules.append(String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
-                        caisRulesSize, msDuration, sDuration));
+                report = String.format("\n==== Size: %d | Time: %d ms, %f s ======\n\n", 
+                        caisRulesSize, msDuration, sDuration);
+                
+                rules.append(report);
+                
+                System.out.println(String.format("%s CAIs report: %s", new Date().toString(), report));
                 
 		return rules.toString();
 	}
